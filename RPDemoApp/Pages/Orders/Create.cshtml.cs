@@ -34,5 +34,24 @@ namespace RPDemoApp.Pages.Orders
                 FoodItems.Add(new SelectListItem { Value = x.Id.ToString(), Text = x.Title });
             });
         }
+
+        public async Task<IActionResult> OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var food = await _foodData.GetFood();
+
+            Order.Total = Order.Quantity * food.Where(x => x.Id == Order.FoodId)
+                                               .First().Price;
+
+            int id = await _orderData.CreateOrder(Order);
+
+            return RedirectToPage("./Display", new { Id = id });
+
+
+        }
     }
 }

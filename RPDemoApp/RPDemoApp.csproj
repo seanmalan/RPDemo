@@ -20,10 +20,4 @@
 	  
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="DataLibrary.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
